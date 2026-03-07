@@ -1,22 +1,28 @@
 using StudentAPI.Repositories;
 using StudentAPI.ServicesLayer;
-
+using Microsoft.Extensions.Caching.Memory;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Add services to the container
 builder.Services.AddControllers();
+
+// Repository Layer
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 
+// Service Layer
 builder.Services.AddScoped<IStudentService, StudentService>();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// Add Memory Cache (needed for caching in controller)
+builder.Services.AddMemoryCache();
+
+// Swagger / API documentation
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -1,6 +1,5 @@
 ﻿using StudentAPI.Models;
 using StudentAPI.Repositories;
-using System.Collections.Generic;
 
 namespace StudentAPI.ServicesLayer
 {
@@ -13,19 +12,19 @@ namespace StudentAPI.ServicesLayer
             _repo = repo;
         }
 
-        public List<Student> GetStudentsByMajor(int majorId)
+        public async Task<List<Student>> GetStudentsByMajorAsync(int majorId)
         {
-            return _repo.GetStudentsByMajor(majorId);
+            return await Task.Run(() => _repo.GetStudentsByMajor(majorId));
         }
 
-        public List<Student> GetStudentsByCourse(int courseId)
+        public async Task<List<Student>> GetStudentsByCourseAsync(int courseId)
         {
-            return _repo.GetStudentsByCourse(courseId);
+            return await Task.Run(() => _repo.GetStudentsByCourse(courseId));
         }
 
-        public List<Student> GetPassedStudents(int courseId)
+        public async Task<List<Student>> GetPassedStudentsAsync(int courseId)
         {
-            return _repo.GetPassedStudents(courseId);
+            return await Task.Run(() => _repo.GetPassedStudents(courseId));
         }
     }
 }
